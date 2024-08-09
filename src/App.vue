@@ -1,24 +1,11 @@
 <template>
-  <header></header>
-  <main>
+  <header class="sticky top-0 bg-white px-6 py-3">
     <muliComboBox @data-selected="handleOffer" />
     <subscriberPage />
     <button type="submit">Search</button>
-    <section class="w-full overflow-x-auto">
-      <table class="w-full">
-        <tr>
-          <th>MSISDN</th>
-          <th>PAYMENT_MODE</th>
-          <th>SUBSCRIBER_STATUS</th>
-          <th>OFFER_ID</th>
-          <th>OFFER_NAME</th>
-          <th>PRIMARY_FLAG</th>
-          <th>OFFER_STATUS</th>
-          <th>OFFER_EFFECT_DATE</th>
-          <th>OFFER_EXP_DATE</th>
-        </tr>
-      </table>
-    </section>
+  </header>
+  <main>
+    <dataTable />
   </main>
 </template>
 
@@ -26,6 +13,7 @@
 import { ref } from 'vue'
 import muliComboBox from './components/muliComboBox.vue'
 import subscriberPage from './components/subscriberPage.vue'
+import dataTable from './components/dataTable.vue'
 
 const selectOffer = ref(null)
 function handleOffer(data) {

@@ -1,7 +1,6 @@
 <?php
-require ('conn2.php');
+require('conn2.php');
 
-// สั่ง Query ข้อมูล
 $sql = "SELECT
     IDEN.SUB_IDENTITY AS MSISDN,
     CASE
@@ -49,18 +48,14 @@ WHERE
     AND IDEN.PRIMARY_FLAG = 1
     AND INST.O_ID IN ('51005338', '51005346')
     AND SUB.STATUS IN (1, 2, 3, 4)";
-$result = $conn->query($sql);
 
-$data = array();
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
-}
 
-$conn->close();
+$conn = $con_oci->query($sql);
+$conn->execute();
+$conn->setFetchMode(PDO::FETCH_ASSOC);
 
-// ส่งข้อมูลออกในรูปแบบ JSON
-echo json_encode($data);
+
+echo json_encode($conn->fetchAll());
+
 ?>

@@ -1,4 +1,5 @@
 <template>
+  <loadingPage v-if="loading" />
   <div>
     <input class="border p-3" type="text" placeholder="Search" v-model="searchOffer" />
     <select name="" id="" class="border p-3" v-model="selectedOfferId">
@@ -7,7 +8,6 @@
         v-for="item in filterOffer"
         :key="item.offering_id"
         :value="item.offering_id"
-        @click="handleSelect"
       >
         {{ item.offering_id + ' - ' + item.offering_name }}
       </option>
@@ -20,17 +20,10 @@
         class="px-3 py-2 bg-gray-400 rounded-md flex items-center gap-x-2"
       >
         {{ item }}
-        <span
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-6"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-          </svg>
+        <span>
+          <button @click="removeItem(i)">
+            <XMarkIcon class="h-5 w-5" />
+          </button>
         </span>
       </p>
     </div>
@@ -39,29 +32,40 @@
 
 <script setup>
 import axios from 'axios'
-
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, watch, computed, defineEmits } from 'vue'
+import { XMarkIcon } from '@heroicons/vue/24/solid'
+import loadingPage from './loadingPage.vue'
 
 const searchOffer = ref('')
 const selectData = ref([])
-const selectedOfferId = ref()
+const selectedOfferId = ref('')
 const historySelectedOfferId = ref([])
+
+const loading = ref(false)
+
+const emit = defineEmits('data-selected')
+
 onMounted(async () => {
   selectData.value = await getSelectData()
 })
 
 const getSelectData = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/offerlist')
+    const response = await axios.get(
+      'http://localhost/select-offering-frontend-vue/public/getOffering.php'
+    )
     return response.data
   } catch (error) {
     return error
+  } finally {
+    loading.value = false
   }
 }
 
 watch(selectedOfferId, (newValue) => {
-  if (newValue) {
+  if (newValue && !historySelectedOfferId.value.includes(newValue)) {
     historySelectedOfferId.value.push(newValue)
+    emit('data-selected', historySelectedOfferId.value)
   }
 })
 
@@ -74,4 +78,9 @@ const filterOffer = computed(() => {
     )
   })
 })
+
+const removeItem = (index) => {
+  historySelectedOfferId.value.splice(index, 1)
+}
+
 </script>

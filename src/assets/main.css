@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
-    overflow: hidden;
-}
+/* main {
+  overflow: hidden;
+} */
+
+/* body {
+  overflow: hidden;
+} */

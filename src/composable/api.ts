@@ -21,7 +21,7 @@ export default function useApi() {
       const response = await axios.get('/getUser.php', {
         params: {
           o_id: data.o_id,
-          status: data.status,
+          status: data.status
         }
       })
       userList.value = response.data

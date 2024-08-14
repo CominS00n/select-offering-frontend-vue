@@ -1,9 +1,14 @@
 <template>
-  <section class="w-full overflow-x-auto min-h-[540px] relative overflow-y-scroll">
+  <section class="w-full space-y-3">
     <loadingPage v-if="loading" />
-    <div class="flex justify-end w-full">
-      <div class="flex gap-x-3">
-        <select name="limit" id="limit" v-model="limit">
+    <div class="flex justify-between">
+      <div>
+        <button class="export inline-flex justify-center items-center">
+          <DocumentArrowUpIcon class="h-5 w-5" />
+        </button>
+      </div>
+      <div class="inline-flex gap-x-3">
+        <select class="border rounded-md" name="limit" id="limit" v-model="limit">
           <option
             v-for="item in limitList"
             :key="item.name"
@@ -33,45 +38,50 @@
             <ChevronRightIcon class="h-5 w-5" />
           </button>
         </div>
+        <p>Total Row: {{ props.totalPages }}</p>
       </div>
     </div>
-    <table class="w-full ">
-      <tr class="bg-white">
-        <th>No</th>
-        <th>MSISDN</th>
-        <th>PAYMENT_MODE</th>
-        <th>SUBSCRIBER_STATUS</th>
-        <th>OFFER_ID</th>
-        <!-- <th>OFFER_NAME</th> -->
-        <th>PRIMARY_FLAG</th>
-        <th>OFFER_STATUS</th>
-        <th>OFFER_EFFECT_DATE</th>
-        <th>OFFER_EXP_DATE</th>
-      </tr>
-      <tr
-        v-for="item in paginatedUser"
-        :key="item.MSISDN"
-        class="text-center"
-        :class="item.RNUM % 2 === 0 ? 'bg-orange-100' : ''"
-      >
-        <td>{{ item.RNUM }}</td>
-        <td>{{ item.MSISDN }}</td>
-        <td>{{ item.PAYMENT_MODE }}</td>
-        <td>{{ item.SUBSCRIBER_STATUS }}</td>
-        <td>{{ item.OFFER_ID }}</td>
-        <!-- <td>{{ item.OFFER_NAME }}</td> -->
-        <td>{{ item.PRIMARY_FLAG }}</td>
-        <td>{{ item.OFFER_STATUS }}</td>
-        <td>{{ item.OFFER_EFFECT_DATE }}</td>
-        <td>{{ item.OFFER_EXP_DATE }}</td>
-      </tr>
+
+    <table class="w-full">
+      <thead class="sticky top-0">
+        <tr class="bg-white font-semibold capitalize">
+          <th>MSISDN</th>
+          <th>PAYMENT MODE</th>
+          <th>SUBSCRIBER STATUS</th>
+          <th>OFFER ID</th>
+          <!-- <th>OFFER_NAME</th> -->
+          <th>PRIMARY FLAG</th>
+          <th>OFFER STATUS</th>
+          <th>OFFER EFFECT DATE</th>
+          <th>OFFER EXP DATE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="item in paginatedUser"
+          :key="item.MSISDN"
+          class="text-center overflow-y-auto"
+          :class="item.RNUM % 2 === 0 ? 'bg-orange-100' : ''"
+        >
+          <td>{{ item.MSISDN }}</td>
+          <td>{{ item.PAYMENT_MODE }}</td>
+          <td>{{ item.SUBSCRIBER_STATUS }}</td>
+          <td>{{ item.OFFER_ID }}</td>
+          <!-- <td>{{ item.OFFER_NAME }}</td> -->
+          <td>{{ item.PRIMARY_FLAG }}</td>
+          <td>{{ item.OFFER_STATUS }}</td>
+          <td>{{ item.OFFER_EFFECT_DATE }}</td>
+          <td>{{ item.OFFER_EXP_DATE }}</td>
+        </tr>
+      </tbody>
     </table>
   </section>
 </template>
 
 <script setup>
-import { ref, watch, defineProps, computed, onUpdated } from 'vue'
+import { ref, watch, defineProps, computed } from 'vue'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid'
+import { DocumentArrowUpIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
   dataValue: {
@@ -86,13 +96,7 @@ const props = defineProps({
   }
 })
 
-const limit = ref(0)
-
-onUpdated(() => {
-  if (limit.value === 0) {
-    pageSize.value = props.dataValue.length
-  }
-})
+const limit = ref(100)
 
 watch(limit, (value) => {
   currentPage.value = 1
@@ -102,10 +106,6 @@ watch(limit, (value) => {
 })
 
 const limitList = ref([
-  {
-    name: 'All',
-    value: 0
-  },
   {
     name: '100',
     value: 100
@@ -123,14 +123,14 @@ const limitList = ref([
     value: 1000
   },
   {
-    name: '10000',
-    value: 10000
+    name: '5000',
+    value: 5000
   }
 ])
 
 const currentPage = ref(1)
 
-const pageSize = ref(0)
+const pageSize = ref(100)
 
 const totalPages = computed(() => Math.ceil(props.dataValue.length / pageSize.value))
 
@@ -154,3 +154,35 @@ function goToNextPage() {
   goToPage(currentPage.value + 1)
 }
 </script>
+
+<style scoped lang="css">
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.export {
+  background-color: #f9f9f9;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+}
+
+.export:hover {
+  background-color: #f3f4f6;
+}
+
+.export::before {
+  content: '';
+  opacity: 0;
+  width: 0;
+  height: 100%;
+  transition: width .5s ease;
+}
+.export:hover::before {
+  content: 'Export';
+  opacity: 1;
+  width: 100%;
+}
+</style>

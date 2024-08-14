@@ -1,47 +1,84 @@
 <template>
-  <loadingPage v-if="loading" />
-  <div>
-    <input class="border p-3" type="text" placeholder="Search" v-model="searchOffer" />
-    <select name="" id="" class="border p-3" v-model="selectedOfferId">
-      <option value="" disabled selected>Select an option</option>
-      <option
-        v-for="item in filterOffer"
-        :key="item.offering_id"
-        :value="item.offering_id"
-      >
-        {{ item.offering_id + ' - ' + item.offering_name }}
-      </option>
-    </select>
-
-    <div class="flex gap-x-3">
-      <p
-        v-for="(item, i) in historySelectedOfferId"
-        :key="i"
-        class="px-3 py-2 bg-gray-400 rounded-md flex items-center gap-x-2"
-      >
-        {{ item }}
-        <span>
-          <button @click="removeItem(i)">
-            <XMarkIcon class="h-5 w-5" />
-          </button>
-        </span>
-      </p>
+  <section>
+    <div class="grid grid-cols-2 gap-x-4 relative">
+      <div class="inline-flex w-full relative overflow-hidden">
+        <div
+          class="bg-black w-full h-full opacity-15 cursor-pointer rounded-md absolute z-10"
+          :class="
+            showSelected === false
+              ? 'transition-transform  translate-x-0 duration-500 ease-in-out'
+              : 'transition-transform translate-x-full duration-500 ease-in-out'
+          "
+          @click="showSelected = !showSelected"
+        ></div>
+        <input
+          class="border p-2 rounded-s-md"
+          type="text"
+          placeholder="Search"
+          v-model="searchOffer"
+        />
+        <select class="border p-2 w-full truncate rounded-e-md" v-model="selectedOfferId">
+          <option value="" disabled selected>Select an option</option>
+          <option v-for="item in filterOffer" :key="item.offering_id" :value="item.offering_id">
+            {{ item.offering_id + ' - ' + item.offering_name }}
+          </option>
+        </select>
+      </div>
+      <div class="inline-flex w-full relative overflow-hidden">
+        <div
+          class="bg-black w-full h-full absolute opacity-15 cursor-pointer rounded-md"
+          :class="
+            showSelected === true
+              ? 'transition-transform  translate-x-0 duration-500 ease-in-out'
+              : 'transition-transform -translate-x-full duration-500 ease-in-out'
+          "
+          @click="showSelected = !showSelected"
+        ></div>
+        <form class="w-full">
+          <label for="file-input" class="sr-only">Choose file</label>
+          <input
+            @change="handleFileUpload"
+            accept=".txt"
+            type="file"
+            name="file-input"
+            id="file-input"
+            class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+          />
+        </form>
+      </div>
     </div>
-  </div>
+  </section>
+  <section>
+    <nav v-if="historySelectedOfferId.length > 0">
+      <button @click="clearAll">clear all</button>
+      <div class="flex gap-x-5 py-1">
+        <p
+          v-for="(item, i) in historySelectedOfferId"
+          :key="i"
+          class="px-2 py-1 rounded-full flex items-center gap-x-2 text-xs border"
+        >
+          {{ item }}
+          <span class="inline-flex items-center">
+            <button @click="removeItem(i)">
+              <XMarkIcon class="h-5 w-5 fill-red-600 hover:fill-red-400" />
+            </button>
+          </span>
+        </p>
+      </div>
+    </nav>
+  </section>
 </template>
 
 <script setup>
 import axios from 'axios'
 import { ref, onMounted, watch, computed, defineEmits } from 'vue'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
-import loadingPage from './loadingPage.vue'
 
 const searchOffer = ref('')
 const selectData = ref([])
 const selectedOfferId = ref('')
 const historySelectedOfferId = ref([])
-
-const loading = ref(false)
+const showSelected = ref(true)
 
 const emit = defineEmits('data-selected')
 
@@ -57,8 +94,6 @@ const getSelectData = async () => {
     return response.data
   } catch (error) {
     return error
-  } finally {
-    loading.value = false
   }
 }
 
@@ -66,6 +101,8 @@ watch(selectedOfferId, (newValue) => {
   if (newValue && !historySelectedOfferId.value.includes(newValue)) {
     historySelectedOfferId.value.push(newValue)
     emit('data-selected', historySelectedOfferId.value)
+    searchOffer.value = ''
+    selectedOfferId.value = ''
   }
 })
 
@@ -78,9 +115,43 @@ const filterOffer = computed(() => {
     )
   })
 })
-
 const removeItem = (index) => {
   historySelectedOfferId.value.splice(index, 1)
 }
 
+const handleFileUpload = (event) => {
+  const file = event.target.files[0]
+
+  if (file && file.type === 'text/plain') {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const text = e.target.result
+      historySelectedOfferId.value = text.split('\r\n').filter((item) => item !== '')
+      emit('data-selected', historySelectedOfferId.value)
+      event.target.value = ''
+    }
+    reader.readAsText(file)
+  }
+}
+
+const clearAll = () => {
+  historySelectedOfferId.value = []
+  emit('data-selected', historySelectedOfferId.value)
+}
 </script>
+
+<style>
+nav div {
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+}
+nav div::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+nav div::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 4px;
+}
+</style>

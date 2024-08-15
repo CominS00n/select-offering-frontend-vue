@@ -12,9 +12,7 @@ $status_list = implode(",", array_map('intval', $status_array));
 
 $offset = ($page - 1) * $limit;
 
-$sql = "SELECT * FROM (
-            SELECT 
-                ROW_NUMBER() OVER (ORDER BY IDEN.SUB_IDENTITY) AS RNUM,
+$sql = "SELECT ROW_NUMBER() OVER (ORDER BY IDEN.SUB_IDENTITY) AS RNUM,
                 IDEN.SUB_IDENTITY AS MSISDN,
                 CASE
                     WHEN DEF_ACCT.PAYMENT_MODE = 0 THEN 'Prepaid'
@@ -54,12 +52,8 @@ $sql = "SELECT * FROM (
                 AND DEF_ACCT.EXP_DATE + 7 / 24 > SYSDATE
                 AND IDEN.PRIMARY_FLAG = 1
                 AND INST.O_ID IN ($o_id_list)
-                AND SUB.STATUS IN ($status_list)
-        )";
+                AND SUB.STATUS IN ($status_list)";
 
-if ($limit) {
-    $sql .= " WHERE RNUM > $offset AND RNUM <= $offset + $limit";
-}
 
 $conn = $con_oci->query($sql);
 $conn->execute();

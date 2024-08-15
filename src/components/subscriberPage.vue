@@ -1,6 +1,8 @@
 <template>
   <div class="flex gap-x-3 items-center">
-    <h2 class="text-lg font-semibold cursor-pointer" @click="hidden = !hidden">Subscriber Status</h2>
+    <h2 class="text-lg font-semibold cursor-pointer" @click="hidden = !hidden">
+      Subscriber Status
+    </h2>
     <button
       @click="hidden = !hidden"
       :class="

@@ -1,7 +1,6 @@
 <?php
 require('conn.php');
 
-// สั่ง Query ข้อมูล
 $sql = "SELECT offering_id, offering_name FROM cat_rtc_offer_manage.main_offering WHERE status IN (1, 2)";
 $result = $conn->query($sql);
 
@@ -15,6 +14,5 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-// ส่งข้อมูลออกในรูปแบบ JSON
 echo json_encode($data);
 ?>

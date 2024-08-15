@@ -13,11 +13,6 @@ export default function useApi() {
   const getUsers = async (data) => {
     try {
       loading.value = true
-      // if (data.limit != null && data.page != null) {
-      //   const response = await axios.get(`/getUser.php?limit=${data.limit}&page=${data.page}`)
-      //   userList.value = response.data
-      //   totalCount.value = response.data.length
-      // } else {
       const response = await axios.get('/getUser.php', {
         params: {
           o_id: data.o_id,
@@ -26,7 +21,6 @@ export default function useApi() {
       })
       userList.value = response.data
       totalCount.value = response.data.length
-      // }
     } catch (err) {
       error.value = err
     } finally {

@@ -19,12 +19,12 @@
 }
 
 .loader-circle {
-  border: 6px solid #f3f3f3; /* Light grey */
-  border-top: 6px solid #3498db; /* Blue */
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #F7C906; /* Blue */
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 2s linear infinite;
+  width: 50px;
+  height: 50px;
+  animation: spin 700ms linear infinite;
 }
 
 @keyframes spin {

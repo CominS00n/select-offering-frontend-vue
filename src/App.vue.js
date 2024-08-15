@@ -42,7 +42,7 @@ function __VLS_template() {
     // CSS variable injection 
     // CSS variable injection end 
     let __VLS_resolvedLocalAndGlobalComponents;
-    __VLS_elementAsFunction(__VLS_intrinsicElements.header, __VLS_intrinsicElements.header)({ ...{ class: ("space-y-3 py-3 px-6") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.header, __VLS_intrinsicElements.header)({ ...{ class: ("space-y-3 py-3 px-6 rounded-md") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.h1, __VLS_intrinsicElements.h1)({ ...{ class: ("text-2xl font-bold uppercase text-[#F7C906] tracking-[.25rem] mb-6") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ ...{ class: ("text-black capitalize") }, });
     // @ts-ignore
@@ -100,10 +100,14 @@ function __VLS_template() {
     const __VLS_23 = __VLS_nonNullable(__VLS_pickFunctionalComponentCtx(dataTable, __VLS_20));
     // @ts-ignore
     [userList, totalCount,];
+    __VLS_elementAsFunction(__VLS_intrinsicElements.footer, __VLS_intrinsicElements.footer)({});
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("flex justify-center items-center h-16 bg-white") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({ ...{ class: ("text-sm text-gray-500 text-center") }, });
     if (typeof __VLS_styleScopedClasses === 'object' && !Array.isArray(__VLS_styleScopedClasses)) {
         __VLS_styleScopedClasses['space-y-3'];
         __VLS_styleScopedClasses['py-3'];
         __VLS_styleScopedClasses['px-6'];
+        __VLS_styleScopedClasses['rounded-md'];
         __VLS_styleScopedClasses['text-2xl'];
         __VLS_styleScopedClasses['font-bold'];
         __VLS_styleScopedClasses['uppercase'];
@@ -134,6 +138,14 @@ function __VLS_template() {
         __VLS_styleScopedClasses['rounded-md'];
         __VLS_styleScopedClasses['mt-2'];
         __VLS_styleScopedClasses['min-h-80'];
+        __VLS_styleScopedClasses['flex'];
+        __VLS_styleScopedClasses['justify-center'];
+        __VLS_styleScopedClasses['items-center'];
+        __VLS_styleScopedClasses['h-16'];
+        __VLS_styleScopedClasses['bg-white'];
+        __VLS_styleScopedClasses['text-sm'];
+        __VLS_styleScopedClasses['text-gray-500'];
+        __VLS_styleScopedClasses['text-center'];
     }
     var __VLS_slots;
     return __VLS_slots;

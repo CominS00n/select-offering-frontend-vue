@@ -12,9 +12,9 @@
           @click="showSelected = !showSelected"
         ></div>
         <input
-          class="border p-2 rounded-s-md"
+          class="border p-2 rounded-s-md text-sm"
           type="text"
-          placeholder="Search"
+          placeholder="Search..."
           v-model="searchOffer"
         />
         <select class="border p-2 w-full truncate rounded-e-md h-11" v-model="selectedOfferId">
@@ -55,7 +55,7 @@
         <p
           v-for="(item, i) in historySelectedOfferId"
           :key="i"
-          class="px-2 py-1 rounded-full flex items-center gap-x-2 text-xs border"
+          class="px-2 py-1 rounded-full flex items-center gap-x-2 text-xs border cursor-default"
         >
           {{ item }}
           <span class="inline-flex items-center">

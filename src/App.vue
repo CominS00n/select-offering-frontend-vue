@@ -1,7 +1,7 @@
 <template>
-  <header class="space-y-3 py-3 px-6">
+  <header class="space-y-3 py-3 px-6 rounded-md">
     <h1 class="text-2xl font-bold uppercase text-[#F7C906] tracking-[.25rem] mb-6">
-      Select <span class="text-black capitalize"> Offering</span>
+      search <span class="text-black capitalize"> Offering</span>
     </h1>
     <muliComboBox @data-selected="handleOffer" />
     <subscriberPage @data-selected="handleStatus" />
@@ -15,10 +15,15 @@
   </header>
   <main class="py-3 px-6 space-y-5 bg-white rounded-md mt-2 min-h-80">
     <loadingPage v-if="loading" />
-    <article> 
+    <article>
       <dataTable :data-value="userList" :total-pages="totalCount" />
     </article>
   </main>
+  <footer>
+    <div class="flex justify-center items-center h-16 bg-white">
+      <p class="text-sm text-gray-500 text-center">© 2024 All Rights Reserved</p>
+    </div>
+  </footer>
 </template>
 
 <script setup>

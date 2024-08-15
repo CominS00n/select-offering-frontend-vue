@@ -78,7 +78,7 @@ function __VLS_template() {
         : 'transition-transform translate-x-full duration-500 ease-in-out');
     // @ts-ignore
     [showSelected,];
-    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ class: ("border p-2 rounded-s-md") }, type: ("text"), placeholder: ("Search"), value: ((__VLS_ctx.searchOffer)), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ class: ("border p-2 rounded-s-md text-sm") }, type: ("text"), placeholder: ("Search..."), value: ((__VLS_ctx.searchOffer)), });
     // @ts-ignore
     [searchOffer,];
     __VLS_elementAsFunction(__VLS_intrinsicElements.select, __VLS_intrinsicElements.select)({ ...{ class: ("border p-2 w-full truncate rounded-e-md h-11") }, value: ((__VLS_ctx.selectedOfferId)), });
@@ -117,7 +117,7 @@ function __VLS_template() {
         [historySelectedOfferId, clearAll,];
         __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("flex gap-x-5 py-1") }, });
         for (const [item, i] of __VLS_getVForSourceType((__VLS_ctx.historySelectedOfferId))) {
-            __VLS_elementAsFunction(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({ key: ((i)), ...{ class: ("px-2 py-1 rounded-full flex items-center gap-x-2 text-xs border") }, });
+            __VLS_elementAsFunction(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({ key: ((i)), ...{ class: ("px-2 py-1 rounded-full flex items-center gap-x-2 text-xs border cursor-default") }, });
             (item);
             __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ ...{ class: ("inline-flex items-center") }, });
             __VLS_elementAsFunction(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)({ ...{ onClick: (...[$event]) => {
@@ -162,6 +162,7 @@ function __VLS_template() {
         __VLS_styleScopedClasses['border'];
         __VLS_styleScopedClasses['p-2'];
         __VLS_styleScopedClasses['rounded-s-md'];
+        __VLS_styleScopedClasses['text-sm'];
         __VLS_styleScopedClasses['border'];
         __VLS_styleScopedClasses['p-2'];
         __VLS_styleScopedClasses['w-full'];
@@ -214,6 +215,7 @@ function __VLS_template() {
         __VLS_styleScopedClasses['gap-x-2'];
         __VLS_styleScopedClasses['text-xs'];
         __VLS_styleScopedClasses['border'];
+        __VLS_styleScopedClasses['cursor-default'];
         __VLS_styleScopedClasses['inline-flex'];
         __VLS_styleScopedClasses['items-center'];
         __VLS_styleScopedClasses['h-5'];

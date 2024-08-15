@@ -1,9 +1,9 @@
 <template>
   <section class="w-full space-y-3">
     <loadingPage v-if="loading" />
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center h-9">
       <div>
-        <button class="export inline-flex justify-center items-center">
+        <button class="export inline-flex justify-center items-center" @click="download">
           <DocumentArrowUpIcon class="h-5 w-5" />
         </button>
       </div>
@@ -60,7 +60,7 @@
         <tr
           v-for="item in paginatedUser"
           :key="item.MSISDN"
-          class="text-center overflow-y-auto"
+          class="text-center overflow-y-auto truncate"
           :class="item.RNUM % 2 === 0 ? 'bg-orange-100' : ''"
         >
           <td>{{ item.MSISDN }}</td>
@@ -82,6 +82,16 @@
 import { ref, watch, defineProps, computed } from 'vue'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid'
 import { DocumentArrowUpIcon } from '@heroicons/vue/24/outline'
+
+import Export from '@/script/export-csv'
+
+const { exportToCsv } = Export()
+
+const download = () => {
+  const date = new Date()
+  const dateString = date.toISOString().slice(0, 10)
+  exportToCsv(props.dataValue, `data-${dateString}.csv`)
+}
 
 const props = defineProps({
   dataValue: {
@@ -163,10 +173,15 @@ td {
 }
 
 .export {
+  display: inline-flex;
+  align-items: center;
   background-color: #f9f9f9;
   border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
   padding: 0.5rem;
+  margin: 0;
+  overflow: hidden;
+  transition: width 0.5s ease;
 }
 
 .export:hover {
@@ -177,11 +192,12 @@ td {
   content: '';
   opacity: 0;
   width: 0;
-  height: 100%;
-  transition: width .5s ease;
+  margin: 0;
+  transition: width 0.5s ease;
 }
 .export:hover::before {
   content: 'Export';
+  margin: 0;
   opacity: 1;
   width: 100%;
 }

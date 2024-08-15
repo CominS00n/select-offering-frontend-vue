@@ -1,5 +1,4 @@
 <template>
-  <!-- <header class="space-y-3 py-3 px-6" :class="{ 'sticky-shadow': hasScrolled }"> -->
   <header class="space-y-3 py-3 px-6">
     <muliComboBox @data-selected="handleOffer" />
     <subscriberPage @data-selected="handleStatus" />
@@ -39,8 +38,6 @@ function handleOffer(data) {
 }
 
 const sendData = () => {
-  console.log(selectOffer.value.length)
-  console.log(selectStatus.value.length)
   if (selectOffer.value.length === 0 || selectStatus.value.length === 0) {
     toast.error('Please select at least one filter', { timeout: 3000 })
   } else {

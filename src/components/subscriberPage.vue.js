@@ -85,7 +85,7 @@ function __VLS_template() {
     const __VLS_11 = __VLS_nonNullable(__VLS_pickFunctionalComponentCtx(__VLS_6, __VLS_8));
     __VLS_elementAsFunction(__VLS_intrinsicElements.section, __VLS_intrinsicElements.section)({});
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({});
-    __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({});
+    __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ ...{ class: ("space-x-2") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ onChange: (__VLS_ctx.toggleCheckAll) }, type: ("checkbox"), id: ("all"), });
     (__VLS_ctx.checkAll);
     // @ts-ignore
@@ -93,7 +93,7 @@ function __VLS_template() {
     __VLS_elementAsFunction(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({ for: ("all"), });
     for (const [item] of __VLS_getVForSourceType((__VLS_ctx.selectList))) {
         __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ key: ((item.name)), ...{ class: ("grid") }, });
-        __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({});
+        __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ ...{ class: ("space-x-2") }, });
         __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ type: ("checkbox"), value: ((item.value)), id: ((item.name)), });
         (__VLS_ctx.checkItems);
         // @ts-ignore
@@ -111,7 +111,9 @@ function __VLS_template() {
         __VLS_styleScopedClasses['cursor-pointer'];
         __VLS_styleScopedClasses['w-5'];
         __VLS_styleScopedClasses['h-5'];
+        __VLS_styleScopedClasses['space-x-2'];
         __VLS_styleScopedClasses['grid'];
+        __VLS_styleScopedClasses['space-x-2'];
     }
     var __VLS_slots;
     return __VLS_slots;

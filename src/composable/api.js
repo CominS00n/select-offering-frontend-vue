@@ -28,5 +28,14 @@ export default function useApi() {
     }
     console.log(data)
   }
-  return { userList, error, getUsers, loading, totalCount }
+
+  const getOffering = async () => {
+    try {
+      const response = await axios.get('/getOffering.php')
+      return response.data
+    } catch (err) {
+      error.value = err
+    }
+  }
+  return { userList, error, getUsers, loading, totalCount, getOffering }
 }

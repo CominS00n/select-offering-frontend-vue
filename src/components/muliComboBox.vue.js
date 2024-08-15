@@ -1,7 +1,8 @@
-import axios from 'axios';
 import { ref, onMounted, watch, computed, defineEmits } from 'vue';
 import { XMarkIcon } from '@heroicons/vue/24/solid';
+import useApi from '@/composable/api';
 const { defineProps, defineSlots, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
+const { getOffering } = useApi();
 const searchOffer = ref('');
 const selectData = ref([]);
 const selectedOfferId = ref('');
@@ -9,17 +10,8 @@ const historySelectedOfferId = ref([]);
 const showSelected = ref(true);
 const emit = defineEmits('data-selected');
 onMounted(async () => {
-    selectData.value = await getSelectData();
+    selectData.value = await getOffering();
 });
-const getSelectData = async () => {
-    try {
-        const response = await axios.get('http://localhost/select-offering-frontend-vue/public/getOffering.php');
-        return response.data;
-    }
-    catch (error) {
-        return error;
-    }
-};
 watch(selectedOfferId, (newValue) => {
     if (newValue && !historySelectedOfferId.value.includes(newValue)) {
         historySelectedOfferId.value.push(newValue);
@@ -73,7 +65,7 @@ function __VLS_template() {
     let __VLS_resolvedLocalAndGlobalComponents;
     __VLS_elementAsFunction(__VLS_intrinsicElements.section, __VLS_intrinsicElements.section)({});
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("grid grid-cols-2 gap-x-4 relative") }, });
-    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("inline-flex w-full relative overflow-hidden") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("inline-flex w-full relative overflow-hidden h-11") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ onClick: (...[$event]) => {
                 __VLS_ctx.showSelected = !__VLS_ctx.showSelected;
                 // @ts-ignore
@@ -89,7 +81,7 @@ function __VLS_template() {
     __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ class: ("border p-2 rounded-s-md") }, type: ("text"), placeholder: ("Search"), value: ((__VLS_ctx.searchOffer)), });
     // @ts-ignore
     [searchOffer,];
-    __VLS_elementAsFunction(__VLS_intrinsicElements.select, __VLS_intrinsicElements.select)({ ...{ class: ("border p-2 w-full truncate rounded-e-md") }, value: ((__VLS_ctx.selectedOfferId)), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.select, __VLS_intrinsicElements.select)({ ...{ class: ("border p-2 w-full truncate rounded-e-md h-11") }, value: ((__VLS_ctx.selectedOfferId)), });
     __VLS_elementAsFunction(__VLS_intrinsicElements.option, __VLS_intrinsicElements.option)({ value: (""), disabled: (true), selected: (true), });
     // @ts-ignore
     [selectedOfferId,];
@@ -100,6 +92,7 @@ function __VLS_template() {
         [filterOffer,];
     }
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("inline-flex w-full relative overflow-hidden") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.form, __VLS_intrinsicElements.form)({ ...{ class: ("w-full") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ onClick: (...[$event]) => {
                 __VLS_ctx.showSelected = !__VLS_ctx.showSelected;
                 // @ts-ignore
@@ -112,9 +105,8 @@ function __VLS_template() {
         : 'transition-transform -translate-x-full duration-500 ease-in-out');
     // @ts-ignore
     [showSelected,];
-    __VLS_elementAsFunction(__VLS_intrinsicElements.form, __VLS_intrinsicElements.form)({ ...{ class: ("w-full") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({ for: ("file-input"), ...{ class: ("sr-only") }, });
-    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ onChange: (__VLS_ctx.handleFileUpload) }, accept: (".txt"), type: ("file"), name: ("file-input"), id: ("file-input"), ...{ class: ("block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ onChange: (__VLS_ctx.handleFileUpload) }, accept: (".txt"), type: ("file"), name: ("file-input"), id: ("file-input"), ...{ class: ("block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400") }, });
     // @ts-ignore
     [handleFileUpload,];
     __VLS_elementAsFunction(__VLS_intrinsicElements.section, __VLS_intrinsicElements.section)({});
@@ -158,6 +150,7 @@ function __VLS_template() {
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['relative'];
         __VLS_styleScopedClasses['overflow-hidden'];
+        __VLS_styleScopedClasses['h-11'];
         __VLS_styleScopedClasses['bg-black'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['h-full'];
@@ -174,10 +167,12 @@ function __VLS_template() {
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['truncate'];
         __VLS_styleScopedClasses['rounded-e-md'];
+        __VLS_styleScopedClasses['h-11'];
         __VLS_styleScopedClasses['inline-flex'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['relative'];
         __VLS_styleScopedClasses['overflow-hidden'];
+        __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['bg-black'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['h-full'];
@@ -185,14 +180,13 @@ function __VLS_template() {
         __VLS_styleScopedClasses['opacity-15'];
         __VLS_styleScopedClasses['cursor-pointer'];
         __VLS_styleScopedClasses['rounded-md'];
-        __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['sr-only'];
         __VLS_styleScopedClasses['block'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['border'];
         __VLS_styleScopedClasses['border-gray-200'];
         __VLS_styleScopedClasses['shadow-sm'];
-        __VLS_styleScopedClasses['rounded-lg'];
+        __VLS_styleScopedClasses['rounded-md'];
         __VLS_styleScopedClasses['text-sm'];
         __VLS_styleScopedClasses['focus:z-10'];
         __VLS_styleScopedClasses['focus:border-blue-500'];

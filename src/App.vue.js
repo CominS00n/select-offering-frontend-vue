@@ -43,6 +43,8 @@ function __VLS_template() {
     // CSS variable injection end 
     let __VLS_resolvedLocalAndGlobalComponents;
     __VLS_elementAsFunction(__VLS_intrinsicElements.header, __VLS_intrinsicElements.header)({ ...{ class: ("space-y-3 py-3 px-6") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.h1, __VLS_intrinsicElements.h1)({ ...{ class: ("text-2xl font-bold uppercase text-[#F7C906] tracking-[.25rem] mb-6") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ ...{ class: ("text-black capitalize") }, });
     // @ts-ignore
     [muliComboBox,];
     // @ts-ignore
@@ -73,7 +75,10 @@ function __VLS_template() {
     let __VLS_10;
     // @ts-ignore
     [handleStatus,];
-    __VLS_elementAsFunction(__VLS_intrinsicElements.main, __VLS_intrinsicElements.main)({ ...{ class: ("py-3 px-6 space-y-5") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)({ ...{ onClick: (__VLS_ctx.sendData) }, type: ("submit"), ...{ class: ("w-full bg-[#F7C906] py-2 rounded-md font-semibold hover:transition hover:bg-[#f7cb06c3] text-white hover:duration-300 hover:ease-in-out hover:bg-white hover:text-[#F7C906] hover:outline hover:outline-[1px] hover:outline-[#F7C906]") }, });
+    // @ts-ignore
+    [sendData,];
+    __VLS_elementAsFunction(__VLS_intrinsicElements.main, __VLS_intrinsicElements.main)({ ...{ class: ("py-3 px-6 space-y-5 bg-white rounded-md mt-2 min-h-80") }, });
     if (__VLS_ctx.loading) {
         // @ts-ignore
         [loadingPage,];
@@ -85,9 +90,6 @@ function __VLS_template() {
         // @ts-ignore
         [loading,];
     }
-    __VLS_elementAsFunction(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)({ ...{ onClick: (__VLS_ctx.sendData) }, type: ("submit"), ...{ class: ("w-full bg-green-600 py-2 rounded-md text-white") }, });
-    // @ts-ignore
-    [sendData,];
     __VLS_elementAsFunction(__VLS_intrinsicElements.article, __VLS_intrinsicElements.article)({});
     // @ts-ignore
     [dataTable,];
@@ -102,14 +104,36 @@ function __VLS_template() {
         __VLS_styleScopedClasses['space-y-3'];
         __VLS_styleScopedClasses['py-3'];
         __VLS_styleScopedClasses['px-6'];
+        __VLS_styleScopedClasses['text-2xl'];
+        __VLS_styleScopedClasses['font-bold'];
+        __VLS_styleScopedClasses['uppercase'];
+        __VLS_styleScopedClasses['text-[#F7C906]'];
+        __VLS_styleScopedClasses['tracking-[.25rem]'];
+        __VLS_styleScopedClasses['mb-6'];
+        __VLS_styleScopedClasses['text-black'];
+        __VLS_styleScopedClasses['capitalize'];
+        __VLS_styleScopedClasses['w-full'];
+        __VLS_styleScopedClasses['bg-[#F7C906]'];
+        __VLS_styleScopedClasses['py-2'];
+        __VLS_styleScopedClasses['rounded-md'];
+        __VLS_styleScopedClasses['font-semibold'];
+        __VLS_styleScopedClasses['hover:transition'];
+        __VLS_styleScopedClasses['hover:bg-[#f7cb06c3]'];
+        __VLS_styleScopedClasses['text-white'];
+        __VLS_styleScopedClasses['hover:duration-300'];
+        __VLS_styleScopedClasses['hover:ease-in-out'];
+        __VLS_styleScopedClasses['hover:bg-white'];
+        __VLS_styleScopedClasses['hover:text-[#F7C906]'];
+        __VLS_styleScopedClasses['hover:outline'];
+        __VLS_styleScopedClasses['hover:outline-[1px]'];
+        __VLS_styleScopedClasses['hover:outline-[#F7C906]'];
         __VLS_styleScopedClasses['py-3'];
         __VLS_styleScopedClasses['px-6'];
         __VLS_styleScopedClasses['space-y-5'];
-        __VLS_styleScopedClasses['w-full'];
-        __VLS_styleScopedClasses['bg-green-600'];
-        __VLS_styleScopedClasses['py-2'];
+        __VLS_styleScopedClasses['bg-white'];
         __VLS_styleScopedClasses['rounded-md'];
-        __VLS_styleScopedClasses['text-white'];
+        __VLS_styleScopedClasses['mt-2'];
+        __VLS_styleScopedClasses['min-h-80'];
     }
     var __VLS_slots;
     return __VLS_slots;

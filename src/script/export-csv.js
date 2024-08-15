@@ -1,10 +1,12 @@
 export default function Export() {
   const exportToCsv = async (data, filename) => {
-    const titleKeys = Object.keys(data[0])
+    const titleKeys = Object.keys(data[0]).slice(1)
     const refinedData = []
     refinedData.push(titleKeys)
+
     data.forEach((item) => {
-      refinedData.push(Object.values(item))
+      const values = Object.values(item).slice(1)
+      refinedData.push(values)
     })
 
     let csvContent = ''

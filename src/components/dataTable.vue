@@ -2,7 +2,7 @@
   <section class="w-full space-y-3 bg-white">
     <loadingPage v-if="loading" />
     <div
-      class="flex items-center h-9"
+      class="flex items-center h-12 sticky top-0 bg-white p-3 z-50"
       :class="totalPages === 0 ? 'justify-end' : 'justify-between'"
     >
       <div v-if="totalPages > 0">
@@ -46,8 +46,7 @@
         <p class="cursor-default">Total Row: {{ props.totalPages }}</p>
       </div>
     </div>
-
-    <table class="w-full border">
+    <table class="w-full border overflow-auto h-full">
       <thead class="sticky top-0">
         <tr class="bg-white font-semibold capitalize">
           <th>MSISDN</th>
@@ -125,6 +124,10 @@ watch(limit, (value) => {
   if (value !== 0) {
     pageSize.value = value
   }
+})
+
+watch(() => props.dataValue, () => {
+  currentPage.value = 1
 })
 
 const limitList = ref([

@@ -13,17 +13,17 @@
       Search
     </button>
   </header>
-  <main class="py-3 px-6 space-y-5 bg-white rounded-md mt-2 min-h-80">
+  <main class="py-3 px-6 space-y-5 bg-white rounded-md mt-2 min-h-80 h-screen overflow-hidden">
     <loadingPage v-if="loading" />
-    <article>
-      <dataTable :data-value="userList" :total-pages="totalCount" />
+    <article class="h-full overflow-y-auto">
+      <dataTable  :data-value="userList" :total-pages="totalCount" />
     </article>
   </main>
-  <footer>
+  <!-- <footer>
     <div class="flex justify-center items-center h-16 bg-white">
       <p class="text-sm text-gray-500 text-center">© 2024 All Rights Reserved</p>
     </div>
-  </footer>
+  </footer> -->
 </template>
 
 <script setup>
@@ -73,4 +73,14 @@ header {
 .sticky-shadow {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+article::-webkit-scrollbar {
+  width: 3px;
+}
+
+article::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 0.25rem;
+}
+
 </style>

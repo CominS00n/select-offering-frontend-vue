@@ -1,37 +1,37 @@
 <template>
   <section>
-    <div class="grid grid-cols-2 gap-x-4 relative">
-      <div class="inline-flex w-full relative overflow-hidden h-11">
+    <div class="grid grid-cols-1 md:gap-x-4 gap-y-4 relative md:grid-cols-2">
+      <div class="inline-flex w-full relative overflow-hidden h-11 rounded-md">
         <div
           class="bg-black w-full h-full opacity-15 cursor-pointer rounded-md absolute z-10"
           :class="
             showSelected === false
-              ? 'transition-transform  translate-x-0 duration-500 ease-in-out'
-              : 'transition-transform translate-x-full duration-500 ease-in-out'
+              ? 'transition-transform translate-x-0 duration-500 ease-in-out delay-100'
+              : 'transition-transform translate-x-full duration-500 ease-in-out delay-200'
           "
           @click="showSelected = !showSelected"
         ></div>
         <input
-          class="border p-2 rounded-s-md text-sm"
+          class="border-y border-l p-2 h-11 rounded-s-md text-sm focus:outline-1 focus:outline-[#f7c906]"
           type="text"
           placeholder="Search..."
           v-model="searchOffer"
         />
-        <select class="border p-2 w-full truncate rounded-e-md h-11" v-model="selectedOfferId">
+        <select class="border p-2 w-full truncate rounded-e-md h-11 focus:outline-none" v-model="selectedOfferId">
           <option value="" disabled selected>Select an option</option>
           <option v-for="item in filterOffer" :key="item.offering_id" :value="item.offering_id">
             {{ item.offering_id + ' - ' + item.offering_name }}
-          </option>
+          </option> 
         </select>
       </div>
-      <div class="inline-flex w-full relative overflow-hidden">
+      <div class="inline-flex w-full relative overflow-hidden rounded-md">
         <form class="w-full">
           <div
             class="bg-black w-full h-full absolute opacity-15 cursor-pointer rounded-md"
             :class="
               showSelected === true
-                ? 'transition-transform  translate-x-0 duration-500 ease-in-out'
-                : 'transition-transform -translate-x-full duration-500 ease-in-out'
+                ? 'transition-transform translate-x-0 duration-500 ease-in-out delay-100'
+                : 'transition-transform -translate-x-full duration-500 ease-in-out delay-200'
             "
             @click="showSelected = !showSelected"
           ></div>
@@ -42,7 +42,7 @@
             type="file"
             name="file-input"
             id="file-input"
-            class="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+            class="block w-full h-11 border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-[#f7c906] focus:ring-[#f7c906] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
           />
         </form>
       </div>
@@ -51,7 +51,7 @@
   <section>
     <nav v-if="historySelectedOfferId.length > 0">
       <button @click="clearAll">clear all</button>
-      <div class="flex gap-x-5 py-1">
+      <div class="flex gap-x-2 py-1">
         <p
           v-for="(item, i) in historySelectedOfferId"
           :key="i"
@@ -88,7 +88,6 @@ const emit = defineEmits('data-selected')
 onMounted(async () => {
   selectData.value = await getOffering()
 })
-
 
 watch(selectedOfferId, (newValue) => {
   if (newValue && !historySelectedOfferId.value.includes(newValue)) {

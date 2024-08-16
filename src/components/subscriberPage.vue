@@ -28,12 +28,12 @@
     <section>
       <div>
         <span class="space-x-2">
-          <input type="checkbox" id="all" v-model="checkAll" @change="toggleCheckAll" />
+          <input type="checkbox" id="all" v-model="checkAll" @change="toggleCheckAll" class="accent-[#f7c906] " />
           <label for="all">All</label>
         </span>
         <span v-for="item in selectList" :key="item.name" class="grid">
           <span class="space-x-2">
-            <input type="checkbox" :value="item.value" :id="item.name" v-model="checkItems" />
+            <input type="checkbox" :value="item.value" :id="item.name" v-model="checkItems" class="accent-[#f7c906]" />
             <label :for="item.name">{{ item.name }}</label>
           </span>
         </span>

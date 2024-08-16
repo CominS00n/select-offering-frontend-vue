@@ -1,5 +1,5 @@
 <template>
-  <header class="space-y-3 py-3 px-6 rounded-md">
+  <header id="header" class="space-y-3 py-3 px-6 rounded-md">
     <h1 class="text-2xl font-bold uppercase text-[#F7C906] tracking-[.25rem] mb-6">
       search <span class="text-black capitalize"> Offering</span>
     </h1>
@@ -15,8 +15,8 @@
   </header>
   <main class="py-3 px-6 space-y-5 bg-white rounded-md mt-2 min-h-80 h-screen overflow-hidden">
     <loadingPage v-if="loading" />
-    <article class="h-full overflow-y-auto">
-      <dataTable  :data-value="userList" :total-pages="totalCount" />
+    <article class="h-full">
+      <dataTable :data-value="userList" :total-pages="totalCount" />
     </article>
   </main>
   <!-- <footer>
@@ -82,5 +82,4 @@ article::-webkit-scrollbar-thumb {
   background-color: #333;
   border-radius: 0.25rem;
 }
-
 </style>

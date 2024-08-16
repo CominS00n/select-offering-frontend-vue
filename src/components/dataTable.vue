@@ -1,16 +1,16 @@
 <template>
-  <section class="w-full space-y-3 bg-white">
+  <section class="flex flex-col w-full h-full space-y-3 bg-white overflow-hidden">
     <loadingPage v-if="loading" />
     <div
-      class="flex items-center h-12 sticky top-0 bg-white p-3 z-50"
-      :class="totalPages === 0 ? 'justify-end' : 'justify-between'"
+      class="sm:flex sm:items-center sm:h-12 space-y-2 bg-white p-3"
+      :class="totalPages === 0 ? 'sm:justify-end' : 'sm:justify-between'"
     >
       <div v-if="totalPages > 0">
         <button class="export inline-flex justify-center items-center" @click="download">
           <DocumentArrowUpIcon class="icon h-5 w-5" />
         </button>
       </div>
-      <div class="inline-flex gap-x-3">
+      <div class="flex justify-end items-center gap-x-3">
         <select class="border rounded-md cursor-pointer" name="limit" id="limit" v-model="limit">
           <option
             v-for="item in limitList"
@@ -43,54 +43,59 @@
             <ChevronRightIcon class="h-5 w-5" />
           </button>
         </div>
-        <p class="cursor-default">Total Row: {{ props.totalPages }}</p>
+        <p class="cursor-default">{{ props.totalPages }} rows</p>
       </div>
     </div>
-    <table class="w-full border overflow-auto h-full">
-      <thead class="sticky top-0">
-        <tr class="bg-white font-semibold capitalize">
-          <th>MSISDN</th>
-          <th>PAYMENT MODE</th>
-          <th>SUBSCRIBER STATUS</th>
-          <th>OFFER ID</th>
-          <!-- <th>OFFER_NAME</th> -->
-          <th>PRIMARY FLAG</th>
-          <th>OFFER STATUS</th>
-          <th>OFFER EFFECT DATE</th>
-          <th>OFFER EXP DATE</th>
-        </tr>
-      </thead>
-      <tbody v-if="totalPages > 0">
-        <tr
-          v-for="item in paginatedUser"
-          :key="item.MSISDN"
-          class="text-center overflow-y-auto truncate"
-          :class="item.RNUM % 2 === 0 ? 'bg-[#f7cb0660]' : ''"
-        >
-          <td>{{ item.MSISDN }}</td>
-          <td>{{ item.PAYMENT_MODE }}</td>
-          <td>{{ item.SUBSCRIBER_STATUS }}</td>
-          <td>{{ item.OFFER_ID }}</td>
-          <!-- <td>{{ item.OFFER_NAME }}</td> -->
-          <td>{{ item.PRIMARY_FLAG }}</td>
-          <td>{{ item.OFFER_STATUS }}</td>
-          <td>{{ item.OFFER_EFFECT_DATE }}</td>
-          <td>{{ item.OFFER_EXP_DATE }}</td>
-        </tr>
-      </tbody>
-      <tbody v-else>
-        <tr>
-          <td colspan="8" class="text-center py-10">No data available</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="content-table w-full h-full overflow-y-auto">
+      <table class="border">
+        <thead>
+          <tr class="bg-white font-semibold capitalize">
+            <th>MSISDN</th>
+            <th>PAYMENT MODE</th>
+            <th>SUBSCRIBER STATUS</th>
+            <th>OFFER ID</th>
+            <th>PRIMARY FLAG</th>
+            <th>OFFER STATUS</th>
+            <th>OFFER EFFECT DATE</th>
+            <th>OFFER EXP DATE</th>
+          </tr>
+        </thead>
+        <tbody v-if="totalPages > 0">
+          <tr
+            v-for="item in paginatedUser"
+            :key="item.MSISDN"
+            class="text-center truncate"
+            :class="item.RNUM % 2 === 0 ? 'bg-[#f7cb0660]' : ''"
+          >
+            <td>{{ item.MSISDN }}</td>
+            <td>{{ item.PAYMENT_MODE }}</td>
+            <td>{{ item.SUBSCRIBER_STATUS }}</td>
+            <td>{{ item.OFFER_ID }}</td>
+            <td>{{ item.PRIMARY_FLAG }}</td>
+            <td>{{ item.OFFER_STATUS }}</td>
+            <td>{{ item.OFFER_EFFECT_DATE }}</td>
+            <td>{{ item.OFFER_EXP_DATE }}</td>
+          </tr>
+        </tbody>
+        <tbody v-else>
+          <tr>
+            <td colspan="8" class="text-center py-10">
+              <span class="inline-flex flex-col items-center">
+                <InboxIcon class="h-10 w-10 text-gray-300" />
+                No data available
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </template>
 
 <script setup>
 import { ref, watch, defineProps, computed } from 'vue'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid'
-import { DocumentArrowUpIcon } from '@heroicons/vue/24/outline'
+import { DocumentArrowUpIcon, InboxIcon } from '@heroicons/vue/24/outline'
 
 import Export from '@/script/export-csv'
 
@@ -126,9 +131,12 @@ watch(limit, (value) => {
   }
 })
 
-watch(() => props.dataValue, () => {
-  currentPage.value = 1
-})
+watch(
+  () => props.dataValue,
+  () => {
+    currentPage.value = 1
+  }
+)
 
 const limitList = ref([
   {
@@ -148,8 +156,8 @@ const limitList = ref([
     value: 1000
   },
   {
-    name: '5000',
-    value: 5000
+    name: '3000',
+    value: 3000
   }
 ])
 
@@ -202,11 +210,11 @@ tbody tr:nth-child(even) {
   background-color: #f7cb0660;
 }
 
-td {
+/* td {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
+} */
 
 .export {
   position: relative;
@@ -233,7 +241,7 @@ td {
 }
 
 .export::before {
-  content: 'Export';
+  content: 'Export CSV';
   position: absolute;
   background-color: #f7c906;
   color: white;
@@ -246,8 +254,18 @@ td {
     opacity 0.5s ease;
 }
 
-.export:hover::before{
+.export:hover::before {
   opacity: 1;
   z-index: 2;
+}
+
+.content-table::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.content-table::-webkit-scrollbar-thumb {
+  background-color: #777777;
+  border-radius: 0.25rem;
 }
 </style>

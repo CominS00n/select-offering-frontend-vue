@@ -64,24 +64,24 @@ function __VLS_template() {
     // CSS variable injection end 
     let __VLS_resolvedLocalAndGlobalComponents;
     __VLS_elementAsFunction(__VLS_intrinsicElements.section, __VLS_intrinsicElements.section)({});
-    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("grid grid-cols-2 gap-x-4 relative") }, });
-    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("inline-flex w-full relative overflow-hidden h-11") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("grid grid-cols-1 md:gap-x-4 gap-y-4 relative md:grid-cols-2") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("inline-flex w-full relative overflow-hidden h-11 rounded-md") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ onClick: (...[$event]) => {
                 __VLS_ctx.showSelected = !__VLS_ctx.showSelected;
                 // @ts-ignore
                 [showSelected, showSelected,];
             } }, ...{ class: ("bg-black w-full h-full opacity-15 cursor-pointer rounded-md absolute z-10") }, ...{ class: ((__VLS_ctx.showSelected === false
-                ? 'transition-transform  translate-x-0 duration-500 ease-in-out'
-                : 'transition-transform translate-x-full duration-500 ease-in-out')) }, });
+                ? 'transition-transform translate-x-0 duration-500 ease-in-out delay-100'
+                : 'transition-transform translate-x-full duration-500 ease-in-out delay-200')) }, });
     __VLS_styleScopedClasses = (showSelected === false
-        ? 'transition-transform  translate-x-0 duration-500 ease-in-out'
-        : 'transition-transform translate-x-full duration-500 ease-in-out');
+        ? 'transition-transform translate-x-0 duration-500 ease-in-out delay-100'
+        : 'transition-transform translate-x-full duration-500 ease-in-out delay-200');
     // @ts-ignore
     [showSelected,];
-    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ class: ("border p-2 rounded-s-md text-sm") }, type: ("text"), placeholder: ("Search..."), value: ((__VLS_ctx.searchOffer)), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ class: ("border-y border-l p-2 h-11 rounded-s-md text-sm focus:outline-1 focus:outline-[#f7c906]") }, type: ("text"), placeholder: ("Search..."), value: ((__VLS_ctx.searchOffer)), });
     // @ts-ignore
     [searchOffer,];
-    __VLS_elementAsFunction(__VLS_intrinsicElements.select, __VLS_intrinsicElements.select)({ ...{ class: ("border p-2 w-full truncate rounded-e-md h-11") }, value: ((__VLS_ctx.selectedOfferId)), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.select, __VLS_intrinsicElements.select)({ ...{ class: ("border p-2 w-full truncate rounded-e-md h-11 focus:outline-none") }, value: ((__VLS_ctx.selectedOfferId)), });
     __VLS_elementAsFunction(__VLS_intrinsicElements.option, __VLS_intrinsicElements.option)({ value: (""), disabled: (true), selected: (true), });
     // @ts-ignore
     [selectedOfferId,];
@@ -91,22 +91,22 @@ function __VLS_template() {
         // @ts-ignore
         [filterOffer,];
     }
-    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("inline-flex w-full relative overflow-hidden") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("inline-flex w-full relative overflow-hidden rounded-md") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.form, __VLS_intrinsicElements.form)({ ...{ class: ("w-full") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ onClick: (...[$event]) => {
                 __VLS_ctx.showSelected = !__VLS_ctx.showSelected;
                 // @ts-ignore
                 [showSelected, showSelected,];
             } }, ...{ class: ("bg-black w-full h-full absolute opacity-15 cursor-pointer rounded-md") }, ...{ class: ((__VLS_ctx.showSelected === true
-                ? 'transition-transform  translate-x-0 duration-500 ease-in-out'
-                : 'transition-transform -translate-x-full duration-500 ease-in-out')) }, });
+                ? 'transition-transform translate-x-0 duration-500 ease-in-out delay-100'
+                : 'transition-transform -translate-x-full duration-500 ease-in-out delay-200')) }, });
     __VLS_styleScopedClasses = (showSelected === true
-        ? 'transition-transform  translate-x-0 duration-500 ease-in-out'
-        : 'transition-transform -translate-x-full duration-500 ease-in-out');
+        ? 'transition-transform translate-x-0 duration-500 ease-in-out delay-100'
+        : 'transition-transform -translate-x-full duration-500 ease-in-out delay-200');
     // @ts-ignore
     [showSelected,];
     __VLS_elementAsFunction(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({ for: ("file-input"), ...{ class: ("sr-only") }, });
-    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ onChange: (__VLS_ctx.handleFileUpload) }, accept: (".txt"), type: ("file"), name: ("file-input"), id: ("file-input"), ...{ class: ("block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ onChange: (__VLS_ctx.handleFileUpload) }, accept: (".txt"), type: ("file"), name: ("file-input"), id: ("file-input"), ...{ class: ("block w-full h-11 border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-[#f7c906] focus:ring-[#f7c906] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400") }, });
     // @ts-ignore
     [handleFileUpload,];
     __VLS_elementAsFunction(__VLS_intrinsicElements.section, __VLS_intrinsicElements.section)({});
@@ -115,7 +115,7 @@ function __VLS_template() {
         __VLS_elementAsFunction(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)({ ...{ onClick: (__VLS_ctx.clearAll) }, });
         // @ts-ignore
         [historySelectedOfferId, clearAll,];
-        __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("flex gap-x-5 py-1") }, });
+        __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("flex gap-x-2 py-1") }, });
         for (const [item, i] of __VLS_getVForSourceType((__VLS_ctx.historySelectedOfferId))) {
             __VLS_elementAsFunction(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({ key: ((i)), ...{ class: ("px-2 py-1 rounded-full flex items-center gap-x-2 text-xs border cursor-default") }, });
             (item);
@@ -143,14 +143,17 @@ function __VLS_template() {
     }
     if (typeof __VLS_styleScopedClasses === 'object' && !Array.isArray(__VLS_styleScopedClasses)) {
         __VLS_styleScopedClasses['grid'];
-        __VLS_styleScopedClasses['grid-cols-2'];
-        __VLS_styleScopedClasses['gap-x-4'];
+        __VLS_styleScopedClasses['grid-cols-1'];
+        __VLS_styleScopedClasses['md:gap-x-4'];
+        __VLS_styleScopedClasses['gap-y-4'];
         __VLS_styleScopedClasses['relative'];
+        __VLS_styleScopedClasses['md:grid-cols-2'];
         __VLS_styleScopedClasses['inline-flex'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['relative'];
         __VLS_styleScopedClasses['overflow-hidden'];
         __VLS_styleScopedClasses['h-11'];
+        __VLS_styleScopedClasses['rounded-md'];
         __VLS_styleScopedClasses['bg-black'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['h-full'];
@@ -159,20 +162,26 @@ function __VLS_template() {
         __VLS_styleScopedClasses['rounded-md'];
         __VLS_styleScopedClasses['absolute'];
         __VLS_styleScopedClasses['z-10'];
-        __VLS_styleScopedClasses['border'];
+        __VLS_styleScopedClasses['border-y'];
+        __VLS_styleScopedClasses['border-l'];
         __VLS_styleScopedClasses['p-2'];
+        __VLS_styleScopedClasses['h-11'];
         __VLS_styleScopedClasses['rounded-s-md'];
         __VLS_styleScopedClasses['text-sm'];
+        __VLS_styleScopedClasses['focus:outline-1'];
+        __VLS_styleScopedClasses['focus:outline-[#f7c906]'];
         __VLS_styleScopedClasses['border'];
         __VLS_styleScopedClasses['p-2'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['truncate'];
         __VLS_styleScopedClasses['rounded-e-md'];
         __VLS_styleScopedClasses['h-11'];
+        __VLS_styleScopedClasses['focus:outline-none'];
         __VLS_styleScopedClasses['inline-flex'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['relative'];
         __VLS_styleScopedClasses['overflow-hidden'];
+        __VLS_styleScopedClasses['rounded-md'];
         __VLS_styleScopedClasses['w-full'];
         __VLS_styleScopedClasses['bg-black'];
         __VLS_styleScopedClasses['w-full'];
@@ -184,14 +193,15 @@ function __VLS_template() {
         __VLS_styleScopedClasses['sr-only'];
         __VLS_styleScopedClasses['block'];
         __VLS_styleScopedClasses['w-full'];
+        __VLS_styleScopedClasses['h-11'];
         __VLS_styleScopedClasses['border'];
         __VLS_styleScopedClasses['border-gray-200'];
         __VLS_styleScopedClasses['shadow-sm'];
         __VLS_styleScopedClasses['rounded-md'];
         __VLS_styleScopedClasses['text-sm'];
         __VLS_styleScopedClasses['focus:z-10'];
-        __VLS_styleScopedClasses['focus:border-blue-500'];
-        __VLS_styleScopedClasses['focus:ring-blue-500'];
+        __VLS_styleScopedClasses['focus:border-[#f7c906]'];
+        __VLS_styleScopedClasses['focus:ring-[#f7c906]'];
         __VLS_styleScopedClasses['disabled:opacity-50'];
         __VLS_styleScopedClasses['disabled:pointer-events-none'];
         __VLS_styleScopedClasses['dark:bg-neutral-900'];
@@ -205,7 +215,7 @@ function __VLS_template() {
         __VLS_styleScopedClasses['dark:file:bg-neutral-700'];
         __VLS_styleScopedClasses['dark:file:text-neutral-400'];
         __VLS_styleScopedClasses['flex'];
-        __VLS_styleScopedClasses['gap-x-5'];
+        __VLS_styleScopedClasses['gap-x-2'];
         __VLS_styleScopedClasses['py-1'];
         __VLS_styleScopedClasses['px-2'];
         __VLS_styleScopedClasses['py-1'];

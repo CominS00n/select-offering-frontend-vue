@@ -1,5 +1,5 @@
 <?php
-require('index.php');
+require('conn.php');
 
 $sql = "SELECT offering_id, offering_name FROM cat_rtc_offer_manage.main_offering WHERE status IN (1, 2)";
 $result = $conn->query($sql);

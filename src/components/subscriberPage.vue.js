@@ -86,7 +86,7 @@ function __VLS_template() {
     __VLS_elementAsFunction(__VLS_intrinsicElements.section, __VLS_intrinsicElements.section)({});
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({});
     __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ ...{ class: ("space-x-2") }, });
-    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ onChange: (__VLS_ctx.toggleCheckAll) }, type: ("checkbox"), id: ("all"), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ ...{ onChange: (__VLS_ctx.toggleCheckAll) }, type: ("checkbox"), id: ("all"), ...{ class: ("accent-[#f7c906] ") }, });
     (__VLS_ctx.checkAll);
     // @ts-ignore
     [hidden, toggleCheckAll, checkAll,];
@@ -94,7 +94,7 @@ function __VLS_template() {
     for (const [item] of __VLS_getVForSourceType((__VLS_ctx.selectList))) {
         __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ key: ((item.name)), ...{ class: ("grid") }, });
         __VLS_elementAsFunction(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({ ...{ class: ("space-x-2") }, });
-        __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ type: ("checkbox"), value: ((item.value)), id: ((item.name)), });
+        __VLS_elementAsFunction(__VLS_intrinsicElements.input)({ type: ("checkbox"), value: ((item.value)), id: ((item.name)), ...{ class: ("accent-[#f7c906]") }, });
         (__VLS_ctx.checkItems);
         // @ts-ignore
         [selectList, checkItems,];
@@ -112,8 +112,10 @@ function __VLS_template() {
         __VLS_styleScopedClasses['w-5'];
         __VLS_styleScopedClasses['h-5'];
         __VLS_styleScopedClasses['space-x-2'];
+        __VLS_styleScopedClasses['accent-[#f7c906]'];
         __VLS_styleScopedClasses['grid'];
         __VLS_styleScopedClasses['space-x-2'];
+        __VLS_styleScopedClasses['accent-[#f7c906]'];
     }
     var __VLS_slots;
     return __VLS_slots;

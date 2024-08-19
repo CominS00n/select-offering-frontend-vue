@@ -1,16 +1,11 @@
 <?php
 require('conn2.php');
 
-$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-
 $o_id_array = isset($_GET['o_id']) ? $_GET['o_id'] : [];
 $o_id_list = implode(",", array_map('intval', $o_id_array));
 
 $status_array = isset($_GET['status']) ? $_GET['status'] : [];
 $status_list = implode(",", array_map('intval', $status_array));
-
-$offset = ($page - 1) * $limit;
 
 $sql = "SELECT ROW_NUMBER() OVER (ORDER BY IDEN.SUB_IDENTITY) AS RNUM,
                 IDEN.SUB_IDENTITY AS MSISDN,

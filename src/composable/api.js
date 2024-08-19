@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { ref } from 'vue'
 
-axios.defaults.baseURL = 'http://localhost/'
+axios.defaults.baseURL = 'http://localhost/select-offering-frontend-vue/public'
 
 export default function useApi() {
   const userList = ref([])

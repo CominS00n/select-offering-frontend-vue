@@ -1,15 +1,23 @@
 <template>
   <section class="flex flex-col w-full h-full space-y-3 bg-white overflow-hidden">
     <loadingPage v-if="loading" />
-    <div
-      class="sm:flex sm:items-center sm:h-12 space-y-2 bg-white p-3"
-      :class="totalPages === 0 ? 'sm:justify-end' : 'sm:justify-between'"
-    >
-      <div v-if="totalPages > 0">
-        <button class="export inline-flex justify-center items-center" @click="download">
-          <DocumentArrowUpIcon class="icon h-5 w-5" />
-        </button>
+    <div class="sm:flex sm:items-center sm:h-12 space-y-2 bg-white p-3" :class="totalPages > 0 ? 'sm:justify-between' : 'sm:justify-end'">
+      <div v-if="totalPages > 0" class="inline-flex items-center gap-x-3">
+        <div class="relative h-fit flex items-center">
+          <input
+            v-model="searchNumber"
+            class="border h-9 rounded-md pl-10 text-sm"
+            placeholder="Search Number in Table"
+          />
+          <MagnifyingGlassIcon class="absolute h-5 w-5 text-gray-400 left-3" />
+        </div>
+        <div >
+          <button class="export inline-flex justify-center items-center" @click="download">
+            <DocumentArrowUpIcon class="icon h-5 w-5" />
+          </button>
+        </div>
       </div>
+
       <div class="flex justify-end items-center gap-x-3">
         <select class="border rounded-md cursor-pointer" name="limit" id="limit" v-model="limit">
           <option
@@ -61,7 +69,7 @@
             <th>Offer EXP date</th>
           </tr>
         </thead>
-        <tbody v-if="totalPages > 0">
+        <tbody v-if="filteredData.length > 0">
           <tr
             v-for="(item, i) in paginatedUser"
             :key="item.MSISDN"
@@ -99,11 +107,12 @@
 <script setup>
 import { ref, watch, defineProps, computed } from 'vue'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid'
-import { DocumentArrowUpIcon, InboxIcon } from '@heroicons/vue/24/outline'
+import { DocumentArrowUpIcon, InboxIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 
 import Export from '@/script/export-csv'
 
 const { exportToCsv } = Export()
+const searchNumber = ref('')
 
 const download = () => {
   const date = new Date()
@@ -171,10 +180,17 @@ const pageSize = ref(100)
 
 const totalPages = computed(() => Math.ceil(props.dataValue.length / pageSize.value))
 
+const filteredData = computed(() => {
+  if (!searchNumber.value) {
+    return props.dataValue
+  }
+  return props.dataValue.filter((item) => item.MSISDN.toString().includes(searchNumber.value))
+})
+
 const paginatedUser = computed(() => {
   const startIndex = (currentPage.value - 1) * pageSize.value
   const endIndex = startIndex + pageSize.value
-  return props.dataValue.slice(startIndex, endIndex)
+  return filteredData.value.slice(startIndex, endIndex)
 })
 
 function goToPage(page) {
@@ -211,7 +227,8 @@ tbody tr {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f7cb0660;
+  background-color: #f7cb063c;
+
 }
 
 .export {

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { ref } from 'vue'
 
-axios.defaults.baseURL = 'http://offering.rtc.mybynt.com'
+axios.defaults.baseURL = 'http://localhost/select-offering-frontend-vue/public'
 
 export default function useApi() {
   const userList = ref([])
@@ -13,7 +13,7 @@ export default function useApi() {
   const getUsers = async (data) => {
     try {
       loading.value = true
-      const response = await axios.get('/getUser.php', {
+      const response = await axios.get('/getOcsCurrent.php', {
         params: {
           o_id: data.o_id,
           status: data.status
@@ -31,10 +31,13 @@ export default function useApi() {
 
   const getOffering = async () => {
     try {
-      const response = await axios.get('/getOffering.php')
+      loading.value = true
+      const response = await axios.get('/getOfferName.php')
       return response.data
     } catch (err) {
       error.value = err
+    } finally {
+      loading.value = false
     }
   }
   return { userList, error, getUsers, loading, totalCount, getOffering }

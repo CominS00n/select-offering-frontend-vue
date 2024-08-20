@@ -1,5 +1,6 @@
 <template>
   <section>
+    <loadingPage v-if="loading" />
     <div class="grid grid-cols-1 md:gap-x-4 gap-y-4 relative md:grid-cols-2">
       <div class="inline-flex w-full relative overflow-hidden h-11 rounded-md">
         <div
@@ -17,34 +18,51 @@
           placeholder="Search..."
           v-model="searchOffer"
         />
-        <select class="border p-2 w-full truncate rounded-e-md h-11 focus:outline-none" v-model="selectedOfferId">
+        <select
+          class="border p-2 w-full truncate rounded-e-md h-11 focus:outline-none"
+          v-model="selectedOfferId"
+        >
           <option value="" disabled selected>Select an option</option>
           <option v-for="item in filterOffer" :key="item.offering_id" :value="item.offering_id">
             {{ item.offering_id + ' - ' + item.offering_name }}
-          </option> 
+          </option>
         </select>
       </div>
-      <div class="inline-flex w-full relative overflow-hidden rounded-md">
-        <form class="w-full">
-          <div
-            class="bg-black w-full h-full absolute opacity-15 cursor-pointer rounded-md"
-            :class="
-              showSelected === true
-                ? 'transition-transform translate-x-0 duration-500 ease-in-out delay-100'
-                : 'transition-transform -translate-x-full duration-500 ease-in-out delay-200'
-            "
-            @click="showSelected = !showSelected"
-          ></div>
-          <label for="file-input" class="sr-only">Choose file</label>
-          <input
-            @change="handleFileUpload"
-            accept=".txt"
-            type="file"
-            name="file-input"
-            id="file-input"
-            class="block w-full h-11 border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-[#f7c906] focus:ring-[#f7c906] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
-          />
-        </form>
+      <div>
+        <div class="inline-flex w-full relative overflow-hidden rounded-md">
+          <form class="w-full">
+            <div
+              class="bg-black w-full h-full absolute opacity-15 cursor-pointer rounded-md"
+              :class="
+                showSelected === true
+                  ? 'transition-transform translate-x-0 duration-500 ease-in-out delay-100'
+                  : 'transition-transform -translate-x-full duration-500 ease-in-out delay-200'
+              "
+              @click="showSelected = !showSelected"
+            ></div>
+            <label for="file-input" class="sr-only">Choose file</label>
+            <input
+              @change="handleFileUpload"
+              accept=".txt"
+              type="file"
+              name="file-input"
+              id="file-input"
+              class="block w-full h-11 border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-[#f7c906] focus:ring-[#f7c906] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-neutral-700 dark:file:text-neutral-400"
+            />
+          </form>
+        </div>
+        <div v-if="showSelected === false" class="inline-flex gap-x-2 text-sm text-gray-500 mt-1">
+          <ExclamationCircleIcon class="h-5 w-5" />
+          <div class="inline-flex gap-x-2">
+            <div>
+              <p>อัปโหลดไฟล์ .txt ที่มีข้อมูล offering_id ตัวอย่าง</p>
+            </div>
+            <div class="inline-block">
+              <p>51005338</p>
+              <p>51005339</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -72,10 +90,12 @@
 <script setup>
 import { ref, onMounted, watch, computed, defineEmits } from 'vue'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
+import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
 
 import useApi from '@/composable/api'
+import loadingPage from './loadingPage.vue'
 
-const { getOffering } = useApi()
+const { getOffering, loading } = useApi()
 
 const searchOffer = ref('')
 const selectData = ref([])
@@ -132,7 +152,7 @@ const clearAll = () => {
 }
 </script>
 
-<style>
+<style scoped>
 nav div {
   overflow-x: auto;
   white-space: nowrap;

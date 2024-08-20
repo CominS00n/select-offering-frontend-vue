@@ -51,26 +51,30 @@
         <thead>
           <tr class="bg-white font-semibold capitalize">
             <th>MSISDN</th>
-            <th>PAYMENT MODE</th>
-            <th>SUBSCRIBER STATUS</th>
-            <th>OFFER ID</th>
-            <th>PRIMARY FLAG</th>
-            <th>OFFER STATUS</th>
-            <th>OFFER EFFECT DATE</th>
-            <th>OFFER EXP DATE</th>
+            <th>payment mode</th>
+            <th>subscriber status</th>
+            <th>offer ID</th>
+            <th>offer name</th>
+            <th>primary flag</th>
+            <th>offer status</th>
+            <th>offer effect data</th>
+            <th>Offer EXP date</th>
           </tr>
         </thead>
         <tbody v-if="totalPages > 0">
           <tr
-            v-for="item in paginatedUser"
+            v-for="(item, i) in paginatedUser"
             :key="item.MSISDN"
             class="text-center truncate"
-            :class="item.RNUM % 2 === 0 ? 'bg-[#f7cb0660]' : ''"
+            :class="i.valueOf % 2 == 0 ? 'bg-[#F7C906] bg-opacity-60' : ''"
           >
             <td>{{ item.MSISDN }}</td>
             <td>{{ item.PAYMENT_MODE }}</td>
             <td>{{ item.SUBSCRIBER_STATUS }}</td>
             <td>{{ item.OFFER_ID }}</td>
+            <td class="max-w-64 truncate">
+              {{ item.OFFER_NAME }}
+            </td>
             <td>{{ item.PRIMARY_FLAG }}</td>
             <td>{{ item.OFFER_STATUS }}</td>
             <td>{{ item.OFFER_EFFECT_DATE }}</td>
@@ -79,7 +83,7 @@
         </tbody>
         <tbody v-else>
           <tr>
-            <td colspan="8" class="text-center py-10">
+            <td colspan="9" class="text-center py-10">
               <span class="inline-flex flex-col items-center">
                 <InboxIcon class="h-10 w-10 text-gray-300" />
                 No data available
@@ -209,12 +213,6 @@ tbody tr {
 tbody tr:nth-child(even) {
   background-color: #f7cb0660;
 }
-
-/* td {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-} */
 
 .export {
   position: relative;

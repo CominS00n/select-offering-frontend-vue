@@ -1,29 +1,24 @@
 <template>
-  <header id="header" class="space-y-3 py-3 px-6 rounded-md">
+  <header id="header" class=" py-3 px-6 rounded-md space-y-1">
     <h1 class="text-3xl font-bold uppercase text-[#F7C906] mb-6">
       OCS <span class="text-black capitalize">Current Offers</span>
     </h1>
     <muliComboBox @data-selected="handleOffer" />
     <subscriberPage @data-selected="handleStatus" />
     <button
-      type="submit"
-      @click="sendData"
-      class="w-full bg-[#F7C906] py-2 rounded-md font-semibold hover:transition hover:bg-[#f7cb06c3] text-white hover:duration-300 hover:ease-in-out hover:bg-white hover:text-[#F7C906] hover:outline hover:outline-[1px] hover:outline-[#F7C906]"
+    type="submit"
+    @click="sendData"
+    class="w-full bg-[#F7C906] py-2 rounded-md mt-3 font-semibold hover:transition hover:bg-[#f7cb06c3] text-white hover:duration-300 hover:ease-in-out hover:bg-white hover:text-[#F7C906] hover:outline hover:outline-[1px] hover:outline-[#F7C906]"
     >
-      Search
-    </button>
-  </header>
-  <main class="py-3 px-6 space-y-5 bg-white rounded-md mt-2 min-h-80 h-screen overflow-hidden">
-    <loadingPage v-if="loading" />
-    <article class="h-full">
+    Search
+  </button>
+</header>
+<main class="py-3 px-6 space-y-5 bg-white rounded-md mt-2 min-h-80 h-screen overflow-hidden">
+  <article class="h-full">
+      <loadingPage v-if="loading" />
       <dataTable :data-value="userList" :total-pages="totalCount" />
     </article>
   </main>
-  <!-- <footer>
-    <div class="flex justify-center items-center h-16 bg-white">
-      <p class="text-sm text-gray-500 text-center">© 2024 All Rights Reserved</p>
-    </div>
-  </footer> -->
 </template>
 
 <script setup>

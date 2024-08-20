@@ -1,7 +1,7 @@
 <template>
   <header id="header" class="space-y-3 py-3 px-6 rounded-md">
-    <h1 class="text-2xl font-bold uppercase text-[#F7C906] tracking-[.25rem] mb-6">
-      search <span class="text-black capitalize"> Offering</span>
+    <h1 class="text-3xl font-bold uppercase text-[#F7C906] mb-6">
+      OCS <span class="text-black capitalize">Current Offers</span>
     </h1>
     <muliComboBox @data-selected="handleOffer" />
     <subscriberPage @data-selected="handleStatus" />

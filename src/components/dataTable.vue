@@ -72,7 +72,7 @@
             <th>Offer EXP date</th>
           </tr>
         </thead>
-        <tbody v-if="filteredData.length > 0">
+        <tbody v-if="filteredData.length > 0" class="tbody">
           <tr
             v-for="(item, i) in paginatedUser"
             :key="item.MSISDN"
@@ -96,7 +96,7 @@
         </tbody>
         <tbody v-else>
           <tr>
-            <td colspan="9" class="text-center py-10">
+            <td colspan="9" class="text-center py-16">
               <span class="inline-flex flex-col items-center">
                 <InboxIcon class="h-10 w-10 text-gray-300" />
                 No data available
@@ -235,7 +235,7 @@ tbody tr:nth-child(even) {
   background-color: #f7cb063c;
 }
 
-tbody tr td {
+.tbody tr td {
   padding: 0.5rem;
   cursor: pointer;
 }

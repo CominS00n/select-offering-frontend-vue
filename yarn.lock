@@ -800,6 +800,11 @@
     de-indent "^1.0.2"
     he "^1.2.0"
 
+"@vue/devtools-api@^6.6.3":
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.6.3.tgz#b23a588154cba8986bba82b6e1d0248bde3fd1a0"
+  integrity sha512-0MiMsFma/HqA6g3KLKn+AGpL1kgKhFWszC9U29NfpWK5LE7bjeXxySWJrOJ77hBz+TBrBQ7o4QJqbPbqbs8rJw==
+
 "@vue/devtools-core@^7.3.7":
   version "7.3.7"
   resolved "https://registry.npmjs.org/@vue/devtools-core/-/devtools-core-7.3.7.tgz"
@@ -1247,6 +1252,11 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@^4.0.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.2.0.tgz#4d931639ecdfd12ff80e8186dba6af2c2e856631"
+  integrity sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==
 
 css-selector-tokenizer@^0.8:
   version "0.8.0"
@@ -3510,6 +3520,13 @@ vscode-uri@^3.0.8:
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-3.0.8.tgz#1770938d3e72588659a172d0fd4642780083ff9f"
   integrity sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==
 
+vue-cryptojs@^2.4.7:
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/vue-cryptojs/-/vue-cryptojs-2.4.7.tgz#9e2dc48c7dbac610c70a361bc8dbb95433f7b2b9"
+  integrity sha512-/HDg1/SU3CLp9bPIbPlLOGJKrcqvp+W8gbCB8GVtnr6txf4vJof2CP4uAvPQMs0AkqyTYJE7agn6+LQA3LIg4A==
+  dependencies:
+    crypto-js "^4.0.0"
+
 vue-eslint-parser@^9.4.3:
   version "9.4.3"
   resolved "https://registry.npmjs.org/vue-eslint-parser/-/vue-eslint-parser-9.4.3.tgz"
@@ -3522,6 +3539,13 @@ vue-eslint-parser@^9.4.3:
     esquery "^1.4.0"
     lodash "^4.17.21"
     semver "^7.3.6"
+
+vue-router@4:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.4.3.tgz#58a39dc804632bfb6d26f052aa8f6718bd130299"
+  integrity sha512-sv6wmNKx2j3aqJQDMxLFzs/u/mjA9Z5LCgy6BE0f7yFWMjrPLnS/sPNn8ARY/FXw6byV18EFutn5lTO6+UsV5A==
+  dependencies:
+    "@vue/devtools-api" "^6.6.3"
 
 vue-toastification@^2.0.0-rc.5:
   version "2.0.0-rc.5"

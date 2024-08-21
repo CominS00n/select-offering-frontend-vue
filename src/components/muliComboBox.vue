@@ -1,8 +1,8 @@
 <template>
   <section>
     <loadingPage v-if="loading" />
-    <div class="grid grid-cols-1 md:gap-x-4 gap-y-4 relative md:grid-cols-2">
-      <div class="inline-flex w-full relative overflow-hidden h-11 rounded-md">
+    <div class="grid grid-cols-1 md:gap-x-4 gap-y-4 md:grid-cols-2">
+      <div class="inline-flex w-full overflow-hidden h-11 rounded-md relative">
         <div
           class="bg-black w-full h-full opacity-15 cursor-pointer rounded-md absolute z-10"
           :class="

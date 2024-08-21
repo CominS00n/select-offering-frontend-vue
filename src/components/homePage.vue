@@ -26,10 +26,10 @@
   import { useToast } from 'vue-toastification'
   import useApi from '@/composable/api'
   
-  import muliComboBox from '../components/muliComboBox.vue'
-  import subscriberPage from '../components/subscriberPage.vue'
-  import dataTable from '../components/dataTable.vue'
-  import loadingPage from '../components/loadingPage.vue'
+  import muliComboBox from './muliComboBox.vue'
+  import subscriberPage from './subscriberPage.vue'
+  import dataTable from './dataTable.vue'
+  import loadingPage from './loadingPage.vue'
   
   const { getUsers, userList, loading, totalCount } = useApi()
   const toast = useToast()

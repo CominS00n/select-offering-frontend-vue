@@ -1,11 +1,16 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
+import App from './App.vue'
 import routes from './router'
 import VueCryptojs from 'vue-cryptojs'
-import App from './App.vue'
 
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
-createApp(App).use(Toast).use(routes).use(VueCryptojs).mount('#app')
+const app = createApp(App)
+
+app.use(Toast)
+app.use(routes)
+app.use(VueCryptojs)
+app.mount('#app')

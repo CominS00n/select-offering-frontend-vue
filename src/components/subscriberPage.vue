@@ -28,14 +28,35 @@
     <section>
       <div>
         <span class="space-x-2">
-          <input type="checkbox" id="all" v-model="checkAll" @change="toggleCheckAll" class="accent-[#f7c906] " />
-          <label for="all">All</label>
+          <!-- <input
+            type="checkbox"
+            id="all"
+            v-model="checkAll"
+            @change="toggleCheckAll"
+            class="accent-[#f7c906]"
+          />
+          <label for="all">All</label> -->
+
+          <label class="gap-x-3 cursor-pointer flex items-center" >
+            <input type="checkbox" checked="checked" class="checkbox checkbox-sm [--chkbg:#f7c906]" v-model="checkAll" @change="toggleCheckAll"  />
+            <span class="label-text text-md">All</span>
+          </label>
         </span>
-        <span v-for="item in selectList" :key="item.name" class="grid">
-          <span class="space-x-2">
-            <input type="checkbox" :value="item.value" :id="item.name" v-model="checkItems" class="accent-[#f7c906]" />
+        <span v-for="item in selectList" :key="item.name" class="grid mt-2">
+          <!-- <span class="space-x-2">
+            <input
+              type="checkbox"
+              :value="item.value"
+              :id="item.name"
+              v-model="checkItems"
+              class="accent-[#f7c906]"
+            />
             <label :for="item.name">{{ item.name }}</label>
-          </span>
+          </span> -->
+          <label class="gap-x-3 cursor-pointer flex items-center" >
+            <input type="checkbox" checked="checked" class="checkbox checkbox-sm [--chkbg:#f7c906] " v-model="checkItems" :value="item.value"  />
+            <span class="label-text text-md">{{ item.name }}</span>
+          </label>
         </span>
       </div>
     </section>

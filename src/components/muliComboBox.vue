@@ -55,7 +55,7 @@
           <ExclamationCircleIcon class="h-5 w-5" />
           <div class="inline-flex gap-x-2">
             <div>
-              <p>อัปโหลดไฟล์ .txt ที่มีข้อมูล offering_id ตัวอย่าง</p>
+              <p>อัปโหลดไฟล์(.txt) Offer id ตัวอย่าง</p>
             </div>
             <div class="inline-block">
               <p>51005338</p>
@@ -68,12 +68,12 @@
   </section>
   <section>
     <nav v-if="historySelectedOfferId.length > 0">
-      <button @click="clearAll">clear all</button>
-      <div class="flex gap-x-2 py-1">
+      <button @click="clearAll" class="hover:text-slate-400">clear all</button>
+      <div class="flex gap-x-2 py-2 px-1">
         <p
           v-for="(item, i) in historySelectedOfferId"
           :key="i"
-          class="px-2 py-1 rounded-full flex items-center gap-x-2 text-xs border cursor-default"
+          class="px-2 py-1 rounded-full flex items-center gap-x-2 text-xs border border-[#f7c906] cursor-default"
         >
           {{ item }}
           <span class="inline-flex items-center">

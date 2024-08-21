@@ -1,17 +1,20 @@
 <template>
   <section class="flex flex-col w-full h-full space-y-3 bg-white overflow-hidden">
     <loadingPage v-if="loading" />
-    <div class="sm:flex sm:items-center sm:h-12 space-y-2 bg-white p-3" :class="totalPages > 0 ? 'sm:justify-between' : 'sm:justify-end'">
+    <div
+      class="sm:flex sm:items-center sm:h-10 space-y-2 bg-white p-1"
+      :class="totalPages > 0 ? 'sm:justify-between' : 'sm:justify-end'"
+    >
       <div v-if="totalPages > 0" class="inline-flex items-center gap-x-3">
         <div class="relative h-fit flex items-center">
           <input
             v-model="searchNumber"
-            class="border h-9 rounded-md pl-10 text-sm"
-            placeholder="Search Number in Table"
+            class="border rounded-md pl-10 text-sm h-9 w-48 focus:border-none focus:outline-[#f7c906] focus:ring-0"
+            placeholder="Search msisdn..."
           />
           <MagnifyingGlassIcon class="absolute h-5 w-5 text-gray-400 left-3" />
         </div>
-        <div >
+        <div>
           <button class="export inline-flex justify-center items-center" @click="download">
             <DocumentArrowUpIcon class="icon h-5 w-5" />
           </button>
@@ -73,15 +76,17 @@
           <tr
             v-for="(item, i) in paginatedUser"
             :key="item.MSISDN"
-            class="text-center truncate"
+            class="text-center"
             :class="i.valueOf % 2 == 0 ? 'bg-[#F7C906] bg-opacity-60' : ''"
           >
             <td>{{ item.MSISDN }}</td>
             <td>{{ item.PAYMENT_MODE }}</td>
             <td>{{ item.SUBSCRIBER_STATUS }}</td>
             <td>{{ item.OFFER_ID }}</td>
-            <td class="max-w-64 truncate">
-              {{ item.OFFER_NAME }}
+            <td class="tooltip max-w-72" :data-tip="item.OFFER_NAME">
+              <p class="w-full truncate">
+                {{ item.OFFER_NAME }}
+              </p>
             </td>
             <td>{{ item.PRIMARY_FLAG }}</td>
             <td>{{ item.OFFER_STATUS }}</td>
@@ -228,7 +233,11 @@ tbody tr {
 
 tbody tr:nth-child(even) {
   background-color: #f7cb063c;
+}
 
+tbody tr td {
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
 .export {
@@ -282,5 +291,10 @@ tbody tr:nth-child(even) {
 .content-table::-webkit-scrollbar-thumb {
   background-color: #777777;
   border-radius: 0.25rem;
+}
+
+.tooltip[data-tip]::before {
+  white-space: nowrap;
+  max-width: none;
 }
 </style>

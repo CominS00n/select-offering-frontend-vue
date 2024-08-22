@@ -5,11 +5,6 @@ import md5 from 'crypto-js/md5'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: '/:verify',
-    //   name: 'Root',
-    //   redirect: '/home'
-    // },
     {
       path: '/:verify',
       query: {
@@ -21,18 +16,6 @@ const router = createRouter({
   ]
 })
 
-// function isValidVerify() {
-//   let date = new Date()
-//   let dateFormated =
-//     date.getFullYear().toString() +
-//     (date.getMonth() + 1).toString().padStart(2, '0') +
-//     date.getDate().toString().padStart(2, '0') +
-//     date.getHours().toString().padStart(2, '0')
-
-//   const hash = md5(dateFormated).toString()
-//   return hash === verify
-// }
-
 router.beforeEach((to, from, next) => {
   const verify = to.query.verify
   const date = new Date()
@@ -42,9 +25,8 @@ router.beforeEach((to, from, next) => {
     date.getDate().toString().padStart(2, '0') +
     date.getHours().toString().padStart(2, '0')
   const hash = md5(dateFormated).toString()
-  console.log('hash', hash)
-  console.log('verify', verify)
   if (hash === verify) {
+    console.log('Valid verify')
     next()
   } else {
     alert('Invalid verify')

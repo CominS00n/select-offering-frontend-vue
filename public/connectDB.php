@@ -4,13 +4,13 @@ header('Access-Control-Allow-Origin: *');
 
 // การเชื่อมต่อกับฐานข้อมูลแรก (MySQL)
 $dsn_mysql = "mysql:host=10.100.137.191";
-$username_mysql = "ms_admin";
-$password_mysql = "msadmin1234";
+$username_mysql = "";
+$password_mysql = "";
 
 // การเชื่อมต่อกับฐานข้อมูลที่สอง (Oracle)
 $dsn_oracle = 'oci:dbname=10.100.1.22:1550/ora12c';
-$username_oracle = 'USR_175';
-$password_oracle = 'Usr_0001';
+$username_oracle = '';
+$password_oracle = '';
 
 try {
     $con_mysql = new PDO($dsn_mysql, $username_mysql, $password_mysql);
